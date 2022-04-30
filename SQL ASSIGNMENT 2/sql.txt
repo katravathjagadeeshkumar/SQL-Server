@@ -1,0 +1,115 @@
+1. Create a Product db table with Primary key, as product name and manufacturer, consider below fields
+
+product id, name, manufacturer, description, stock numbers
+
+
+Query:
+------
+
+
+
+create table Product(id number, name varchar(30), manufacturer varchar(30), description varchar(100), stock_numbers number, constraint p_pk primay key(name, manufacturer));
+
+=======================================================================================================================
+
+
+2. Can I use alter to add/remove primary key from already existing table?If so, how?
+
+Query:
+------
+
+create table Product(id number, name varchar(30), manufacturer varchar(30), description varchar(100), stock_numbers number);
+
+ALTER TABLE Product 
+ADD CONSTRAINT pk_procuct PRIMARY KEY (id);
+
+
+=======================================================================================================================
+#3. Give an example for self referential key, employee with one of the column as manager,
+ and manager himself is another Employee
+
+
+Query :
+-------
+
+create table emp9(id int primary key,name varchar(20),mgr_id int references emp9(id));
+
+ insert into emp9(id,name) values(1,'Siva'),(2,'Ram'),(3,'Krishna'),(4,'Vaka');
+
+ insert into emp9 values(5,'Rohit',1);
+
+ -- insert into emp9 values(6,'Surya',10);
+
+ select * from emp9
+
+
+========================================================================================================================
+#4. In existing Product and Seller table scenario, create another table Transactions(with columns id, product id, date time, seller id),
+ create foreign key constraint between Transactions table and Seller table with on delete set null clause.
+
+Query:
+-------
+
+
+CREATE TABLE seller
+( seller_id number not null,
+  seller_name varchar2(50) not null,
+  contact_name varchar2(50),
+  CONSTRAINT supplier_pk PRIMARY KEY (seller_id)
+);
+
+CREATE TABLE products
+( product_id number not null,
+  supplier_id number not null,
+  supplier_name varchar2(50) not null,
+  CONSTRAINT fk_seller
+    FOREIGN KEY (seller_id)
+    REFERENCES seller(seller_id)
+    ON DELETE CASCADE
+);
+
+
+CREATE TABLE Transactions
+( transcation_id number notnull,
+  product_id number not null,
+  date datetime notnull,
+  seller_id number not null,
+  CONSTRAINT fk_transcation_seller(seller_id)
+  REFERENCES seller(seller_id)
+  ON DELETE CASCADE
+);
+
+
+========================================================================================================================
+
+5. seller(sid, sname,scontact ),product(pid, sid, pname, pmake, pmodel)
+
+join, please try left and right outer joins separately
+
+
+
+Query:
+------
+
+create table seller(sid number primary key,sname varchar(30),scontact number);
+
+create table produt(pid number,sid number foreign key references seller(sid),
+pname varchar(50),pmake varchar(40),pmodel varchar(50));
+
+insert into seller values(1,'siva',5678909098),(2,'Rama',4567890989),(3,'Krishna',9876789876);
+
+select * from  seller
+
+insert into product values(1,1,'TV','Samsung','A1Quality'),(2,2,'TV','LG','A2Quality'),(3,3,'AC','A1Quality'),(4,2,'AC','A1Quality);')
+
+select * from product
+
+
+
+
+
+select * from seller s right outer join product p on s.sid=p.pid
+
+select * from seller s left outer join product p on s.sid=p.pid
+
+===================================================================================================================
