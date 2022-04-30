@@ -1,0 +1,21 @@
+CREATE TABLE seller(SId INT PRIMERY KEY,SName VARCHAR(30),SContact NUMERIC(9,0));
+
+INSERT INTO seller VALUES(1,'JAGADEESH',12345673),(2,'ROHITH SHARMA',12345672),(3,'Jawahar',5126789);
+
+select * from seller
+
+CREATE TABLE Product(
+Pid INT FOREGIN KEY references seller(sid)),
+Pname VARCHAR(20),Pmake VARCHAR(20),
+PModel VARCHAR(20)
+);
+
+insert into product values(1,'Jgadeesh','moble','2022');
+
+select s.sid,s.sname from seller as s right outer join product as p
+                        on s.sid=p.pid
+                        where s.sid is null
+                        
+select s.sid,s.sname from seller as s left outer join product as p
+                        on s.sid=p.pid
+                        where p.pid is null

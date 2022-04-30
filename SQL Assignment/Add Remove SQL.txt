@@ -1,0 +1,14 @@
+CREATE TABLE student(
+Rno INT PRIMERY KEY,
+Name VARCHAR(20),
+Sch VARCHAR(20)
+);
+
+insert into student values(1,'JAGADEESH','CBIT'),(2,'KUMAR','MGIT'),(3,'JAWAHAR','srichaithyana');
+
+SELECT * 
+FROM student;
+
+ALTER TABLE student DROP CONSTRAINT PK_student;
+
+ALTER TABLE student ADD PRIMERY KEY(Name); 

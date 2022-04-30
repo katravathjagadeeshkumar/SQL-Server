@@ -1,0 +1,10 @@
+CREATE TABLE Items(
+Id INT,
+Name varchar(30), 
+Manufacturer(30),
+Description text, 
+Stock_numbers int, 
+Constraint p_pk PRIMARY KEY(name, manufacturer)
+);
+INSERT INTO Product VALUES(1,'Jagadeesh','mobile','nice product',01),(2,'Rohith','Laptop','Avg Price',02),(3,'Dhoni','car','High Maintance',03);
+SELECT Id,Name from Product
